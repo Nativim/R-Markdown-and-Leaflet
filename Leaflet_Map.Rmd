@@ -1,0 +1,41 @@
+---
+title: "R Markdown and Leaflet"
+author: "Nati Munoz"
+date: "30/06/2019"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, eval = TRUE)
+```
+
+## Introduction
+
+As part of the "Developing Data Products" course in coursera we will build an html page with an interactive map. The map will be from London and will highlight 3 of its main attractions.
+
+Before we can build the map we need to isntall the leaflet package and library.
+
+```{r , echo=FALSE}
+install.packages("leaflet",repos = "http://cran.us.r-project.org")
+library(leaflet)
+```
+
+## Creation of the map
+
+The leaflet function will create a world map so I will give some coordinates to show only London. The coordinates are passed as a parameter by building a dataframe with the latitude, longitud and name of the points to show in the map.
+
+```{r, echo=FALSE}
+
+map <- data.frame(lat= c(51.503399,51.504501, 51.500942), lng= c(-0.119519, -0.086500, -0.177498))
+name <- c("London Eye", "The Shard", "Royal Albert Hall")
+
+map  %>% 
+  leaflet() %>% 
+  addTiles()%>% 
+  addMarkers(popup= name)
+map
+
+```
+
